@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electronic Health Record</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+
+  <body>
+      <h1>Electronic Health Record</h1>
+      <!-- buttons for switching between sections -->
+        <button onclick="showSection('addPatient')">Add Patient</button>
+        <button id = "viewButton" onclick="showSection('viewPatient')">View Patients</button>
+        <button onclick="showSection('addVisit1')">Add Visit</button>
+
+      <div id = "addPatient" class = "section" style ="display:none">
+        <!-- Form for adding patients, including necessary data as referenced below -->
+        <div id = "patAdder"> 
+          <input id = "fn" type = "text" placeholder = "First Name" required> <br>
+          <input id = "ln" type = "text" placeholder = "Last Name" required> <br>
+          Date of Birth: <input id = "dob" type = "date" required> <br>
+          Gender: <select id ="gender" required>
+            <option value="">None</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select> <br>
+          <input id = "email" type = "email" placeholder="Email (required)" required> <br>
+          <small>Format:123-456-7890</small><input id = "phone" type = "tel" placeholder="Phone number with dashes (optional)" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+         <textarea id="conditions" placeholder="Medical conditions (please list)" required></textarea>
+          <button id="addPat">Save patient</button>
+        </div>
+      </div>
+      
+      <div id = "viewPatient" class = "section" style ="display:none">
+        <div id="viewBox" style="margin-top: 20px;">
+          <h3>Patient List</h3>
+          <!-- Section that lists each patient data using a central table -->
+          <table id = "viewBox1" border="1" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Actions</th>
+              </tr>
+              <tbody id = "patTableBody" style="text-align: center;"></tbody>
+              <!-- patTableBody is where patient data is inputted -->
+            </thead>
+          </table>
+        </div>
+      </div>
+      
+      
+      <div id = "addVisit1" class = "section" style ="display:none">
+        <div id = "visitAdder"> <!-- Add form div -->
+          Select patient: <select id ="patSelect" required> <!-- Gets updated using code to include patients -->
+          <option value = "">None</option>  
+          </select> <br>
+          Reason for visit: <select id = "reasonSelect" required>Reason for Visit
+            <option value="">-- Select Reason --</option>
+            <option value="General Checkup">General Checkup</option>
+            <option value="Follow-up Appointment">Follow-up Appointment</option>
+            <option value="Vaccination">Vaccination</option>
+            <option value="Chronic Condition Management">Chronic Condition Management</option>
+            <option value="Acute Illness (e.g., cold, flu)">Acute Illness (e.g., cold, flu)</option>
+            <option value="Injury or Trauma">Injury or Trauma</option>
+            <option value="Mental Health Consultation">Mental Health Consultation</option>
+            <option value="Medication Refill">Medication Refill</option>
+            <option value="Review Lab/Test Results">Review Lab/Test Results</option>
+            <option value="Referral to Specialist">Referral to Specialist</option>
+          </select><br>
+          Date of Visit: <input id = "visitDate" type = "date" required> <br>
+          <textarea id="symptoms" placeholder="Medical symptoms (please list)" required></textarea>
+          <textarea id="diagnosis" placeholder="Diagnosis (IDC-10 code)" required></textarea>
+          <textarea id="medPerscribed" placeholder="Medication(s) persecribed" required></textarea>
+          <textarea id="notes" placeholder="Additional notes" required></textarea>
+          <br><button id="addVisitButton">Save Visit</button>
+          
+        </div>
+        <div id = "viewHistoryBox"> <!-- Secondary div for visit data -->
+        </div>
+          <button id="viewHistory1">View Visit History</button>
+          <br><button class = "backVisit" id = "backVisit1">Back</back>
+      </div>
+      
+      <!-- In summary: hides all divs with "section" class and shows the clicked one -->
+      <script>
+        function showSection(id) { 
+          document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
+          document.getElementById(id).style.display = 'block';
+        }
+      </script>
+      <script type="module" src="./main.js"></script>
+  </body>
+</html>
